@@ -31,9 +31,9 @@ void addStudent()
     printf("Enter ID: ");
     scanf("%d", &students[count].id);
     printf("Enter Name: ");
-    scanf("%s", students[count].name);
+    scanf(" %99[^\n]", students[count].name);
     printf("Enter Major: ");
-    scanf("%s", students[count].major);
+    scanf(" %49[^\n]", students[count].major);
     printf("Enter GPA: ");
     scanf("%f", &students[count].gpa);
     printf("Enter Credits: ");
