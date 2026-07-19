@@ -1,9 +1,6 @@
 # Student Registry Project
 
-This is my Day 12 project. It's basically my Day 10 student registry but now
-it saves everything to a file so the data doesn't disappear when you close
-the program. I also split the code into separate files like the assignment
-asked.
+Hello sir mao ni enhanced version I apologize for passing late couldnt properly figure out how to do struct but i did my best and hopefully maka remmeber which is which sa defense 
 
 ## What it does
 
@@ -85,6 +82,10 @@ students).
 - Kept adding students until I hit 10 (the max) and tried adding an 11th
   one, it correctly said the list is full instead of crashing or messing
   up the array.
+- Tried adding a student with a multi-word name ("Ken Miles") and major
+  ("Computer Science") after running into a bug where they got cut off
+  and shifted into the wrong fields (see below) — after the fix, both
+  came through correctly and saved to the file exactly as typed.
 
 ## Problems I ran into / things I had to think about
 
@@ -103,3 +104,14 @@ I didn't add extra error checking beyond what's needed to get it working
 (like checking scanf return values) since that wasn't really covered in
 the lessons yet, but the basic file checks (making sure fopen doesn't
 return NULL) are there since that was in the notes.
+
+While testing, I ran into a bug where entering a name with a space in it
+(like "Ken Miles") broke everything after it. It turned out scanf with
+%s stops reading at the first space, so it only grabbed "Ken" and left
+"Miles" sitting there to get read as the next field (major), which
+pushed every field after that one over by one, and eventually a text
+word landed where a number was expected and scanf just got stuck. I
+fixed it by switching name and major to scanf(" %99[^\n]", ...) instead
+of %s, which reads the whole line up to the newline instead of stopping
+at the first space, so multi-word names and majors like "Computer
+Science" work correctly now.
